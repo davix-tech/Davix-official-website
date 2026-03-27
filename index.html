@@ -3,172 +3,148 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DAVIX | Developer & Editor</title>
-
+<title>Davix.Tech</title>
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+/* ===== CSS START ===== */
 
-  body {
-    font-family: "Segoe UI", sans-serif;
-    background: #020617;
-    color: #e2e8f0;
-  }
+/* Reset & basic */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+body { background:#111; color:#eee; line-height:1.6; scroll-behavior: smooth; }
+a { text-decoration:none; color:#0af; transition:0.3s; }
+a:hover { color:#0ff; }
 
-  header {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background: radial-gradient(circle at top, #0f172a, #020617);
-    text-align: center;
-    padding: 20px;
-  }
+/* Header */
+header { display:flex; justify-content:space-between; align-items:center; padding:1rem 3rem; background:#111; position:fixed; top:0; width:100%; z-index:1000; border-bottom:1px solid #222; }
+header .logo { font-size:1.8rem; font-weight:700; letter-spacing:1px; color:#0af; }
+header nav a { margin-left:1.5rem; font-weight:500; }
+header nav a:hover { color:#0ff; }
 
-  h1 {
-    font-size: 50px;
-    letter-spacing: 2px;
-  }
+/* Hero */
+.hero { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:10rem 2rem 8rem 2rem; background:#0a0a0a; }
+.hero h1 { font-size:3rem; margin-bottom:1rem; color:#0ff; }
+.hero p { font-size:1.3rem; margin-bottom:2rem; }
+.hero .cta { background:#0af; color:#111; padding:0.8rem 2rem; border-radius:5px; font-weight:600; }
 
-  .highlight {
-    color: #38bdf8;
-  }
+/* Sections */
+section { padding:5rem 2rem; max-width:1200px; margin:0 auto; opacity:0; transform:translateY(30px); transition:all 0.8s ease-out; }
+section.fade-in { opacity:1; transform:translateY(0); }
+h2 { font-size:2rem; margin-bottom:2rem; text-align:center; color:#0af; }
 
-  .tagline {
-    margin-top: 10px;
-    font-size: 18px;
-    opacity: 0.8;
-  }
+/* About */
+.about ul.stats { list-style:none; display:flex; justify-content:center; gap:2rem; margin-top:2rem; }
+.about ul.stats li { background:#222; padding:1rem 2rem; border-radius:8px; }
 
-  .btn {
-    margin-top: 20px;
-    padding: 12px 24px;
-    border: none;
-    background: #38bdf8;
-    color: #020617;
-    font-weight: bold;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: 0.3s;
-  }
+/* Portfolio */
+.portfolio .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2rem; }
+.project-card { background:#222; padding:1rem; border-radius:8px; transition:0.3s; }
+.project-card:hover { transform:translateY(-5px); box-shadow:0 4px 20px rgba(0,255,255,0.3); }
+.project-card img { width:100%; border-radius:5px; margin-bottom:1rem; }
 
-  .btn:hover {
-    background: #0ea5e9;
-  }
+/* Services */
+.service-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2rem; }
+.service-cards .card { background:#222; padding:1.5rem; border-radius:8px; text-align:center; transition:0.3s; }
+.service-cards .card:hover { transform:translateY(-5px); box-shadow:0 4px 20px rgba(0,255,255,0.3); }
 
-  section {
-    padding: 60px 20px;
-    text-align: center;
-  }
+/* Forms */
+form { display:flex; flex-direction:column; max-width:500px; margin:0 auto; gap:1rem; }
+input, textarea { padding:0.8rem; border:none; border-radius:5px; background:#222; color:#eee; }
+button { padding:0.8rem; border:none; border-radius:5px; background:#0af; color:#111; font-weight:600; cursor:pointer; }
+button:hover { background:#0ff; }
 
-  h2 {
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
+/* Footer */
+footer { text-align:center; padding:2rem; color:#555; border-top:1px solid #222; }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    max-width: 900px;
-    margin: auto;
-  }
+/* Scroll offset for fixed header */
+section { scroll-margin-top:80px; }
 
-  .card {
-    background: #0f172a;
-    padding: 25px;
-    border-radius: 12px;
-    transition: 0.3s;
-    border: 1px solid #1e293b;
-  }
-
-  .card:hover {
-    transform: translateY(-5px);
-    border-color: #38bdf8;
-  }
-
-  .project {
-    background: linear-gradient(145deg, #0f172a, #020617);
-  }
-
-  footer {
-    padding: 20px;
-    text-align: center;
-    font-size: 14px;
-    background: #020617;
-    border-top: 1px solid #1e293b;
-  }
+/* ===== CSS END ===== */
 </style>
 </head>
-
 <body>
 
-<!-- HERO -->
 <header>
-  <h1>DAVIX<span class="highlight">.</span></h1>
-  <p class="tagline">
-    Web Developer • Graphics Designer • Video Editor
-  </p>
-
-  <a href="https://wa.me/2349016402583" class="btn">
-    Hire Me
-  </a>
+    <div class="logo">Davix.Tech<span style="font-size:0.6rem; color:#0ff;">100</span></div>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#contact">Contact</a>
+    </nav>
 </header>
 
+<!-- HERO -->
+<section class="hero" id="home">
+    <h1>Davix.Tech</h1>
+    <p>Creative Tech & Visual Solutions</p>
+    <a href="#contact" class="cta">Get in Touch</a>
+</section>
+
 <!-- ABOUT -->
-<section>
-  <h2>About Me</h2>
-  <p style="max-width:600px; margin:auto;">
-    I'm DAVIX, a multi-skilled digital creator focused on building modern websites,
-    clean graphics, and engaging video edits. I help individuals and brands
-    stand out online with simple but effective design.
-  </p>
+<section class="about" id="about">
+    <h2>About Davix</h2>
+    <p>Hello, I’m Davix. I specialise in graphics design, video editing, and tech projects. I combine creativity and technology to deliver professional solutions for clients globally.</p>
+    <ul class="stats">
+        <li>Projects: 50+</li>
+        <li>Clients: 30+</li>
+        <li>Experience: 5 Years</li>
+    </ul>
 </section>
 
 <!-- SERVICES -->
-<section>
-  <h2>What I Do</h2>
-
-  <div class="grid">
-    <div class="card">Website Development</div>
-    <div class="card">Graphic Design</div>
-    <div class="card">Video Editing</div>
-  </div>
+<section class="services" id="services">
+    <h2>Services</h2>
+    <div class="service-cards">
+        <div class="card">Graphics Design</div>
+        <div class="card">Video Editing</div>
+        <div class="card">Tech Projects</div>
+        <div class="card">Brand Consultation</div>
+    </div>
 </section>
 
-<!-- PROJECTS -->
-<section>
-  <h2>Projects</h2>
-
-  <div class="grid">
-    <div class="card project">
-      <p>My first live website project.</p>
-      <a href="https://davix-tech.github.io/Davix-official-website/" class="btn">
-        View Project
-      </a>
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+    <h2>Portfolio</h2>
+    <div class="grid">
+        <div class="project-card"><img src="https://via.placeholder.com/400x250" alt="Project 1"><p>Project 1</p></div>
+        <div class="project-card"><img src="https://via.placeholder.com/400x250" alt="Project 2"><p>Project 2</p></div>
+        <div class="project-card"><img src="https://via.placeholder.com/400x250" alt="Project 3"><p>Project 3</p></div>
+        <div class="project-card"><img src="https://via.placeholder.com/400x250" alt="Project 4"><p>Project 4</p></div>
     </div>
-
-    <div class="card project">
-      <p>Graphics and video edits (coming soon).</p>
-    </div>
-  </div>
 </section>
 
 <!-- CONTACT -->
-<section>
-  <h2>Contact</h2>
-  <p>Ready to work? Message me directly.</p>
-  <a href="https://wa.me/2349016402583" class="btn">Chat on WhatsApp</a>
+<section class="contact" id="contact">
+    <h2>Contact Me</h2>
+    <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="5" placeholder="Your Message"></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+    <p style="text-align:center; margin-top:1rem;">Or reach me on WhatsApp: <a href="https://wa.me/2349016402583">+234 901 640 2583</a></p>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <p>© 2026 DAVIX — Built with precision</p>
+    &copy; 2026 Davix.Tech<span style="font-size:0.6rem;">100</span>. All rights reserved.
 </footer>
+
+<script>
+// ===== JS START =====
+// Fade-in on scroll
+const faders = document.querySelectorAll('section');
+const options = { threshold:0.2 };
+const appearOnScroll = new IntersectionObserver(function(entries, observer){
+    entries.forEach(entry => {
+        if(entry.isIntersecting){
+            entry.target.classList.add('fade-in');
+            observer.unobserve(entry.target);
+        }
+    });
+}, options);
+faders.forEach(fader => appearOnScroll.observe(fader));
+// ===== JS END =====
+</script>
 
 </body>
 </html>
