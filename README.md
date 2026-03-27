@@ -1,2 +1,176 @@
 # Davix-official-website
 Public
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAVIX | Developer & Editor</title>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Segoe UI", sans-serif;
+    background: #020617;
+    color: #e2e8f0;
+  }
+
+  header {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(circle at top, #0f172a, #020617);
+    text-align: center;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 50px;
+    letter-spacing: 2px;
+  }
+
+  .highlight {
+    color: #38bdf8;
+  }
+
+  .tagline {
+    margin-top: 10px;
+    font-size: 18px;
+    opacity: 0.8;
+  }
+
+  .btn {
+    margin-top: 20px;
+    padding: 12px 24px;
+    border: none;
+    background: #38bdf8;
+    color: #020617;
+    font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+
+  .btn:hover {
+    background: #0ea5e9;
+  }
+
+  section {
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: auto;
+  }
+
+  .card {
+    background: #0f172a;
+    padding: 25px;
+    border-radius: 12px;
+    transition: 0.3s;
+    border: 1px solid #1e293b;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    border-color: #38bdf8;
+  }
+
+  .project {
+    background: linear-gradient(145deg, #0f172a, #020617);
+  }
+
+  footer {
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+    background: #020617;
+    border-top: 1px solid #1e293b;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<header>
+  <h1>DAVIX<span class="highlight">.</span></h1>
+  <p class="tagline">
+    Web Developer • Graphics Designer • Video Editor
+  </p>
+
+  <a href="https://wa.me/2349016402583" class="btn">
+    Hire Me
+  </a>
+</header>
+
+<!-- ABOUT -->
+<section>
+  <h2>About Me</h2>
+  <p style="max-width:600px; margin:auto;">
+    I'm DAVIX, a multi-skilled digital creator focused on building modern websites,
+    clean graphics, and engaging video edits. I help individuals and brands
+    stand out online with simple but effective design.
+  </p>
+</section>
+
+<!-- SERVICES -->
+<section>
+  <h2>What I Do</h2>
+
+  <div class="grid">
+    <div class="card">Website Development</div>
+    <div class="card">Graphic Design</div>
+    <div class="card">Video Editing</div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section>
+  <h2>Projects</h2>
+
+  <div class="grid">
+    <div class="card project">
+      <p>My first live website project.</p>
+      <a href="https://davix-tech.github.io/Davix-official-website/" class="btn">
+        View Project
+      </a>
+    </div>
+
+    <div class="card project">
+      <p>Graphics and video edits (coming soon).</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section>
+  <h2>Contact</h2>
+  <p>Ready to work? Message me directly.</p>
+  <a href="https://wa.me/2349016402583" class="btn">Chat on WhatsApp</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 DAVIX — Built with precision</p>
+</footer>
+
+</body>
+</html>
