@@ -3,158 +3,415 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Davix.Tech</title>
-
+<title>Davix.Tech — Visuals That Hit Different</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
-body{background:#0d0d0d;color:#eee;line-height:1.6}
+:root {
+  --cyan: #00f5ff;
+  --dark: #040810;
+  --surface: #0a1020;
+  --surface2: #0d1528;
+  --text: #c8d8f0;
+  --muted: #4a6080;
+  --glow: 0 0 20px rgba(0,245,255,0.4), 0 0 60px rgba(0,245,255,0.15);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--text);font-family:'Space Mono',monospace;overflow-x:hidden;cursor:none}
 
-/* Header */
-header{
-display:flex;
-justify-content:space-between;
-padding:1rem 2rem;
-border-bottom:1px solid #222;
-position:sticky;
-top:0;
-background:#0d0d0d;
-}
-nav a{
-color:#0af;
-margin-left:20px;
-text-decoration:none;
-font-weight:500;
-}
-nav a:hover{color:#0ff}
+.cursor{position:fixed;width:10px;height:10px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);box-shadow:var(--glow);transition:width .2s,height .2s}
+.cursor-ring{position:fixed;width:34px;height:34px;border:1px solid rgba(0,245,255,.35);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%)}
 
-/* Hero */
-.hero{
-padding:120px 20px;
-text-align:center;
-}
-.hero h1{
-font-size:2.8rem;
-margin-bottom:15px;
-color:#0ff;
-}
-.hero p{
-font-size:1.2rem;
-max-width:600px;
-margin:auto;
-margin-bottom:30px;
-}
-.btn{
-background:#0af;
-color:#111;
-padding:12px 25px;
-border-radius:5px;
-text-decoration:none;
-font-weight:600;
-}
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,255,.025) 1px,transparent 1px);background-size:60px 60px;pointer-events:none;z-index:0}
+.grid-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(0,102,255,.1) 0%,transparent 70%)}
+.scanlines{position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.07) 2px,rgba(0,0,0,.07) 4px);pointer-events:none;z-index:1}
 
-/* Sections */
-section{
-padding:70px 20px;
-max-width:1000px;
-margin:auto;
-text-align:center;
-}
-h2{
-margin-bottom:20px;
-color:#0af;
-}
+/* HEADER */
+header{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 3rem;background:rgba(4,8,16,.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,245,255,.07)}
+.logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:1.2rem;color:var(--cyan);text-shadow:var(--glow);letter-spacing:2px;text-decoration:none}
+.logo span{color:rgba(200,216,240,.4)}
+nav{display:flex;gap:2rem;align-items:center}
+nav a{font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .3s;position:relative}
+nav a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--cyan);transform:scaleX(0);transition:transform .3s}
+nav a:hover{color:var(--cyan)}
+nav a:hover::after{transform:scaleX(1)}
+.nav-cta{border:1px solid var(--cyan);color:var(--cyan)!important;padding:.5rem 1.2rem;transition:background .3s,box-shadow .3s}
+.nav-cta:hover{background:rgba(0,245,255,.08)!important;box-shadow:var(--glow)}
+.nav-cta::after{display:none!important}
 
-/* Services */
-.cards{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:15px;
-margin-top:20px;
-}
-.card{
-background:#1a1a1a;
-padding:20px;
-border-radius:6px;
-width:250px;
-transition:0.3s;
-}
-.card:hover{
-transform:translateY(-5px);
-box-shadow:0 5px 20px rgba(0,255,255,0.2);
-}
+/* HERO */
+.hero{position:relative;z-index:2;min-height:100vh;display:flex;align-items:center;padding:140px 3rem 80px;overflow:hidden}
+.hero-content{max-width:680px}
+.hero-tag{display:inline-block;font-size:.6rem;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(0,245,255,.3);padding:.4rem 1rem;margin-bottom:2rem;animation:fadeUp .8s ease both}
+.hero h1{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(2.2rem,5.5vw,4.2rem);line-height:1.07;letter-spacing:-1px;margin-bottom:1.5rem;animation:fadeUp .8s ease .15s both}
+.hero h1 em{font-style:normal;color:var(--cyan);text-shadow:var(--glow);display:block;position:relative}
+.hero h1 em::before{content:attr(data-text);position:absolute;top:0;left:0;color:#ff0066;opacity:0;animation:glitch 5s infinite;clip-path:polygon(0 30%,100% 30%,100% 60%,0 60%)}
+@keyframes glitch{0%,88%,100%{transform:translate(0);opacity:0}89%{transform:translate(-3px,1px);opacity:.7}91%{transform:translate(3px,-1px);opacity:.7}93%{transform:translate(0);opacity:0}}
+.hero p{font-size:.88rem;line-height:1.95;color:var(--text);opacity:.7;max-width:500px;margin-bottom:2.5rem;animation:fadeUp .8s ease .3s both}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp .8s ease .45s both}
+.btn-primary{background:var(--cyan);color:#000;padding:.9rem 2rem;font-family:'Orbitron',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:2px;text-decoration:none;text-transform:uppercase;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:box-shadow .3s,transform .2s}
+.btn-primary:hover{box-shadow:var(--glow);transform:translateY(-2px)}
+.btn-secondary{background:transparent;color:var(--text);padding:.9rem 2rem;font-size:.68rem;letter-spacing:2px;text-decoration:none;text-transform:uppercase;border:1px solid rgba(255,255,255,.1);transition:border-color .3s,color .3s}
+.btn-secondary:hover{border-color:var(--cyan);color:var(--cyan)}
 
-/* Portfolio */
-.portfolio img{
-width:260px;
-margin:10px;
-border-radius:5px;
-}
+/* Orbit */
+.hero-orbit{position:absolute;right:4rem;top:50%;transform:translateY(-50%);width:420px;height:420px;opacity:.22;animation:fadeUp 1s ease .6s both}
+.orbit-ring{position:absolute;inset:0;border-radius:50%;border:1px solid var(--cyan);animation:spin 18s linear infinite}
+.orbit-ring:nth-child(2){inset:40px;border-color:rgba(0,102,255,.6);animation:spin 12s linear infinite reverse}
+.orbit-ring:nth-child(3){inset:90px;border-color:rgba(0,245,255,.3);animation:spin 8s linear infinite}
+.orbit-dot{position:absolute;width:8px;height:8px;background:var(--cyan);border-radius:50%;top:-4px;left:50%;transform:translateX(-50%);box-shadow:0 0 10px var(--cyan)}
+.orbit-center{position:absolute;inset:40%;background:radial-gradient(circle,rgba(0,245,255,.25) 0%,transparent 70%);border-radius:50%}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 
-/* Footer */
-footer{
-text-align:center;
-padding:20px;
-border-top:1px solid #222;
-color:#666;
+.scroll-hint{position:absolute;bottom:2.5rem;left:3rem;display:flex;align-items:center;gap:.8rem;font-size:.58rem;letter-spacing:3px;color:var(--muted);text-transform:uppercase;animation:fadeUp 1s ease 1s both}
+.scroll-line{width:40px;height:1px;background:var(--muted);position:relative;overflow:hidden}
+.scroll-line::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:var(--cyan);animation:scrollAnim 2s ease infinite}
+@keyframes scrollAnim{0%{left:-100%}100%{left:100%}}
+
+/* STATS */
+.stats-bar{position:relative;z-index:2;background:var(--surface);border-top:1px solid rgba(0,245,255,.07);border-bottom:1px solid rgba(0,245,255,.07);display:flex;justify-content:center}
+.stat-item{flex:1;max-width:240px;padding:2.2rem 1rem;text-align:center;border-right:1px solid rgba(0,245,255,.05)}
+.stat-item:last-child{border-right:none}
+.stat-num{font-family:'Orbitron',sans-serif;font-size:2rem;font-weight:900;color:var(--cyan);display:block;text-shadow:var(--glow)}
+.stat-label{font-size:.58rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-top:.4rem;display:block}
+
+/* SECTION */
+.section{position:relative;z-index:2;padding:100px 3rem;max-width:1100px;margin:auto}
+.section-tag{font-size:.58rem;letter-spacing:4px;color:var(--cyan);text-transform:uppercase;display:block;margin-bottom:.8rem}
+.section-title{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(1.5rem,3vw,2.3rem);letter-spacing:-.5px;line-height:1.1}
+.section-header{margin-bottom:4rem;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem}
+.section-desc{font-size:.78rem;line-height:1.9;color:var(--muted);max-width:340px;text-align:right}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(0,245,255,.05)}
+.service-card{background:var(--surface);padding:2.5rem 2rem;position:relative;overflow:hidden;transition:background .3s}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);transform:scaleX(0);transition:transform .4s}
+.service-card:hover{background:var(--surface2)}
+.service-card:hover::before{transform:scaleX(1)}
+.service-num{font-family:'Orbitron',sans-serif;font-size:.58rem;color:var(--cyan);letter-spacing:3px;margin-bottom:2rem;display:block;opacity:.6}
+.service-icon-wrap{width:48px;height:48px;margin-bottom:1.5rem;color:var(--cyan)}
+.service-card h3{font-family:'Orbitron',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:1px;margin-bottom:1rem;color:#fff}
+.service-card p{font-size:.75rem;line-height:1.85;color:var(--muted)}
+
+/* PORTFOLIO */
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.portfolio-item{position:relative;overflow:hidden;background:var(--surface);cursor:pointer;aspect-ratio:4/3}
+.portfolio-item.wide{grid-column:span 2;aspect-ratio:unset;min-height:220px}
+.portfolio-inner{position:absolute;inset:0;background:linear-gradient(135deg,var(--surface2) 0%,#060e1e 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem}
+.portfolio-inner svg{width:36px;height:36px;opacity:.12;color:var(--cyan)}
+.portfolio-inner span{font-size:.55rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+.portfolio-overlay{position:absolute;inset:0;background:rgba(0,245,255,.06);border:1px solid rgba(0,245,255,0);opacity:0;transition:opacity .3s,border-color .3s;display:flex;align-items:flex-end;padding:1.2rem}
+.portfolio-item:hover .portfolio-overlay{opacity:1;border-color:rgba(0,245,255,.35)}
+.portfolio-overlay span{font-size:.6rem;letter-spacing:2px;color:var(--cyan);text-transform:uppercase}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.about-visual{position:relative}
+.about-frame{aspect-ratio:1;background:var(--surface2);border:1px solid rgba(0,245,255,.1);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px))}
+.about-frame::before{content:'';position:absolute;inset:-50%;background:conic-gradient(from 0deg,transparent 0%,rgba(0,245,255,.08) 30%,transparent 60%);animation:spin 10s linear infinite}
+.about-frame-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:1rem;text-align:center}
+.about-frame-inner svg{width:72px;height:72px;color:rgba(0,245,255,.25)}
+.about-frame-inner p{font-size:.58rem;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
+.corner{position:absolute;width:24px;height:24px;border-color:var(--cyan);border-style:solid;opacity:.5}
+.corner.tl{top:-8px;left:-8px;border-width:2px 0 0 2px}
+.corner.tr{top:-8px;right:-8px;border-width:2px 2px 0 0}
+.corner.bl{bottom:-8px;left:-8px;border-width:0 0 2px 2px}
+.corner.br{bottom:-8px;right:-8px;border-width:0 2px 2px 0}
+.about-text p{font-size:.8rem;line-height:2;color:var(--text);opacity:.72;margin-bottom:1.2rem}
+.tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.8rem}
+.tag{font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);border:1px solid rgba(0,245,255,.22);padding:.4rem .9rem}
+
+/* CONTACT */
+.contact-wrap{position:relative;z-index:2;padding:100px 3rem;background:var(--surface);border-top:1px solid rgba(0,245,255,.06);border-bottom:1px solid rgba(0,245,255,.06);text-align:center}
+.contact-inner{max-width:600px;margin:auto}
+.contact-wrap h2{font-family:'Orbitron',sans-serif;font-weight:900;font-size:clamp(1.8rem,4vw,3rem);margin-bottom:1.2rem;line-height:1.1}
+.contact-wrap p{font-size:.82rem;line-height:1.9;color:var(--muted);margin-bottom:2.5rem}
+.contact-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+
+/* FOOTER */
+footer{position:relative;z-index:2;padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(0,245,255,.06);flex-wrap:wrap;gap:1rem}
+.footer-logo{font-family:'Orbitron',sans-serif;font-size:.9rem;font-weight:900;color:var(--cyan);text-decoration:none;letter-spacing:2px}
+footer p{font-size:.6rem;letter-spacing:1px;color:var(--muted)}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{font-size:.6rem;letter-spacing:2px;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .3s}
+.footer-links a:hover{color:var(--cyan)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  header{padding:1rem 1.5rem}
+  nav a:not(.nav-cta){display:none}
+  .hero{padding:120px 1.5rem 70px}
+  .hero-orbit{display:none}
+  .section{padding:70px 1.5rem}
+  .services-grid{grid-template-columns:1fr}
+  .portfolio-grid{grid-template-columns:1fr}
+  .portfolio-item.wide{grid-column:span 1}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .stats-bar{flex-wrap:wrap}
+  .stat-item{min-width:50%}
+  .contact-wrap{padding:70px 1.5rem}
+  footer{padding:1.5rem;flex-direction:column;text-align:center}
+  .section-desc{text-align:left}
 }
 </style>
-
 </head>
-
 <body>
 
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="grid-bg"></div>
+<div class="scanlines"></div>
+
+<!-- HEADER -->
 <header>
-<h2>Davix.Tech</h2>
-<nav>
-<a href="#home">Home</a>
-<a href="#services">Services</a>
-<a href="#portfolio">Work</a>
-<a href="#contact">Contact</a>
-</nav>
+  <a href="#home" class="logo">Davix<span>.Tech</span></a>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact" class="nav-cta">Hire Me</a>
+  </nav>
 </header>
 
 <!-- HERO -->
 <section class="hero" id="home">
-<h1>I Build Visuals That Get Attention</h1>
-<p>
-Graphics design and video editing for people who are tired of average content.
-If your brand looks basic, it gets ignored. I fix that.
-</p>
-<a href="#contact" class="btn">Start a Project</a>
+  <div class="hero-content">
+    <div class="hero-tag">// Available for Projects</div>
+    <h1>
+      I Build Visuals<br>
+      <em data-text="That Hit Different">That Hit Different</em>
+    </h1>
+    <p>Graphics design and video editing for brands that refuse to blend in. If your content looks average, it gets ignored. I make sure that never happens.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Start a Project</a>
+      <a href="#work" class="btn-secondary">View My Work</a>
+    </div>
+  </div>
+  <div class="hero-orbit">
+    <div class="orbit-ring"><div class="orbit-dot"></div></div>
+    <div class="orbit-ring"></div>
+    <div class="orbit-ring"></div>
+    <div class="orbit-center"></div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll to explore
+  </div>
 </section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-num" data-count="50">0</span>
+    <span class="stat-label">Projects Completed</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" data-count="30">0</span>
+    <span class="stat-label">Happy Clients</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num" data-count="3">0</span>
+    <span class="stat-label">Years Experience</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">∞</span>
+    <span class="stat-label">Creative Ideas</span>
+  </div>
+</div>
 
 <!-- SERVICES -->
-<section id="services">
-<h2>What I Do</h2>
-<div class="cards">
-<div class="card">High-quality Graphics Design</div>
-<div class="card">Professional Video Editing</div>
-<div class="card">Brand Visual Identity</div>
+<div class="section" id="services">
+  <div class="section-header">
+    <div>
+      <span class="section-tag">// What I Do</span>
+      <h2 class="section-title">Services</h2>
+    </div>
+    <p class="section-desc">Every project gets full attention. No templates. No shortcuts.</p>
+  </div>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <span class="service-num">01 —</span>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+      </div>
+      <h3>Graphics Design</h3>
+      <p>Logos, brand identities, social media visuals, flyers, and more. Designed to make people stop scrolling.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-num">02 —</span>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23,7 16,12 23,17"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+      </div>
+      <h3>Video Editing</h3>
+      <p>Reels, promos, YouTube content, and cinematic cuts. Edited to keep your audience watching until the end.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-num">03 —</span>
+      <div class="service-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      </div>
+      <h3>Brand Identity</h3>
+      <p>A full visual system for your brand — colors, fonts, style guidelines, and assets that stay consistent everywhere.</p>
+    </div>
+  </div>
 </div>
-</section>
 
 <!-- PORTFOLIO -->
-<section class="portfolio" id="portfolio">
-<h2>Selected Work</h2>
-<p>Replace these with your real projects.</p>
+<div class="section" id="work">
+  <div class="section-header">
+    <div>
+      <span class="section-tag">// Selected Work</span>
+      <h2 class="section-title">Portfolio</h2>
+    </div>
+    <p class="section-desc">Replace placeholders with your real project screenshots.</p>
+  </div>
+  <div class="portfolio-grid reveal">
+    <div class="portfolio-item wide">
+      <div class="portfolio-inner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        <span>Featured Project</span>
+      </div>
+      <div class="portfolio-overlay"><span>Brand Identity — 2025</span></div>
+    </div>
+    <div class="portfolio-item">
+      <div class="portfolio-inner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23,7 16,12 23,17"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        <span>Project</span>
+      </div>
+      <div class="portfolio-overlay"><span>Video Edit</span></div>
+    </div>
+    <div class="portfolio-item">
+      <div class="portfolio-inner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        <span>Project</span>
+      </div>
+      <div class="portfolio-overlay"><span>Graphic Design</span></div>
+    </div>
+    <div class="portfolio-item">
+      <div class="portfolio-inner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polygon points="10,8 16,12 10,16"/></svg>
+        <span>Project</span>
+      </div>
+      <div class="portfolio-overlay"><span>Promo Video</span></div>
+    </div>
+    <div class="portfolio-item">
+      <div class="portfolio-inner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        <span>Project</span>
+      </div>
+      <div class="portfolio-overlay"><span>Brand System</span></div>
+    </div>
+    <div class="portfolio-item">
+      <div class="portfolio-inner">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        <span>Project</span>
+      </div>
+      <div class="portfolio-overlay"><span>Social Media Kit</span></div>
+    </div>
+  </div>
+</div>
 
-<img src="https://via.placeholder.com/260x160">
-<img src="https://via.placeholder.com/260x160">
-<img src="https://via.placeholder.com/260x160">
-</section>
+<!-- ABOUT -->
+<div class="section" id="about">
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="about-frame">
+        <div class="about-frame-inner">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <p>Your photo here</p>
+        </div>
+      </div>
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+    </div>
+    <div class="about-text reveal">
+      <span class="section-tag">// Who I Am</span>
+      <h2 class="section-title" style="margin-bottom:1.5rem">Davix100.<br>Creative Director.</h2>
+      <p>I'm a graphics designer and video editor who takes visuals seriously. Based in Nigeria, working with clients worldwide — from personal brands to businesses that want to look premium online.</p>
+      <p>Every project starts with understanding what you need and ends with something that makes you proud to share it. Quality is the only option.</p>
+      <div class="tags">
+        <span class="tag">Photoshop</span>
+        <span class="tag">Illustrator</span>
+        <span class="tag">Premiere Pro</span>
+        <span class="tag">After Effects</span>
+        <span class="tag">CapCut</span>
+        <span class="tag">Canva Pro</span>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- CONTACT -->
-<section id="contact">
-<h2>Work With Me</h2>
-<p>If you're serious about quality, let's talk.</p>
+<div class="contact-wrap" id="contact">
+  <div class="contact-inner reveal">
+    <span class="section-tag">// Let's Work</span>
+    <h2>Ready to Make<br>Something Great?</h2>
+    <p>If you're serious about quality visuals, hit me up. I'll respond fast and we'll get your project moving.</p>
+    <div class="contact-btns">
+      <a href="https://wa.me/2349016402583" class="btn-primary">Message on WhatsApp</a>
+      <a href="mailto:davix@davix.tech" class="btn-secondary">Send an Email</a>
+    </div>
+  </div>
+</div>
 
-<a href="https://wa.me/2349016402583" class="btn">Message on WhatsApp</a>
-</section>
-
+<!-- FOOTER -->
 <footer>
-© 2026 Davix.Tech — Davix100
+  <a href="#home" class="footer-logo">Davix.Tech</a>
+  <p>© 2026 Davix.Tech — All rights reserved</p>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </div>
 </footer>
 
+<script>
+// Custom cursor
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+});
+(function animRing(){
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+})();
+document.querySelectorAll('a,button').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{ cursor.style.width='18px'; cursor.style.height='18px'; ring.style.width='50px'; ring.style.height='50px'; });
+  el.addEventListener('mouseleave',()=>{ cursor.style.width='10px'; cursor.style.height='10px'; ring.style.width='34px'; ring.style.height='34px'; });
+});
+
+// Scroll reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Counter
+const cObs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting) return;
+    const el=entry.target;
+    const target=+el.getAttribute('data-count');
+    let current=0; const step=target/50;
+    const timer=setInterval(()=>{
+      current+=step;
+      if(current>=target){ current=target; clearInterval(timer); }
+      el.textContent=Math.floor(current)+'+';
+    },30);
+    cObs.unobserve(el);
+  });
+},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>cObs.observe(el));
+</script>
 </body>
 </html>
